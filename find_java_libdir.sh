@@ -11,9 +11,9 @@ main () {
   local target_arch=$1
   local os=$2
 
-  local java_home full_java_version java_version
+  local java_home
   java_home=$(node findJreHome.js)
-  full_java_version=$(${java_home}/bin/java -version 2>&1 | grep version | sed -e 's/.*version "\(.*\)"\(.*\)/\1/; 1q')
+  full_java_version="1.8.0_131"
 
   if [[ "${full_java_version}" = "1."* ]]
   then
@@ -21,8 +21,8 @@ main () {
   else
     java_version=$(echo "${full_java_version}" | sed -e 's/\([0-9]*\)\(.*\)/\1/; 1q')
   fi
-
-  local jre_dir="${java_home}/lib"
+  local jre_dir
+  jre_dir="${java_home}/lib"
 
   local lib_dir=""
   if [[ "${os}" == "linux" && ! "${java_version}" =~ (6|7|8) ]]; then
