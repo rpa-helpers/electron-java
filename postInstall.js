@@ -2,17 +2,19 @@ var glob = require('glob');
 var fs = require('fs');
 var path = require('path');
 var os = require('os');
+var jre = require('node-jre');
+console.log(jre.driver());
+const jreHome=path.dirname(path.dirname(jre.driver()));
 
-require('find-java-home')(function(err, home){
   var dll;
   var dylib;
   var so,soFiles;
   var binary;
 
-  if(home){
-    dll = glob.sync('**/jvm.dll', {cwd: home})[0];
-    dylib = glob.sync('**/libjvm.dylib', {cwd: home})[0];
-    soFiles = glob.sync('**/libjvm.so', {cwd: home});
+  if(jreHome){
+    dll = glob.sync('**/jvm.dll', {cwd: jreHome})[0];
+    dylib = glob.sync('**/libjvm.dylib', {cwd: jreHome})[0];
+    soFiles = glob.sync('**/libjvm.so', {cwd: jreHome});
     
     if(soFiles.length>0)
       so = getCorrectSoForPlatform(soFiles);
@@ -24,12 +26,11 @@ require('find-java-home')(function(err, home){
       binary
       ? JSON.stringify(
           path.delimiter
-          + path.dirname(path.resolve(home, binary))
+          + path.dirname(path.resolve(jreHome, binary))
         )
       : '""'
     );
   }
-});
 
 function getCorrectSoForPlatform(soFiles){
   var so = _getCorrectSoForPlatform(soFiles);
