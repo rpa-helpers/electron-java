@@ -11,7 +11,7 @@ main () {
   local target_arch=$1
   local os=$2
 
-  local java_home
+  local java_home full_java_version java_version
   java_home=$(node findJreHome.js)
   full_java_version="1.8.0_131"
 
@@ -21,9 +21,11 @@ main () {
   else
     java_version=$(echo "${full_java_version}" | sed -e 's/\([0-9]*\)\(.*\)/\1/; 1q')
   fi
-  local jre_dir
-  jre_dir="${java_home}/lib"
 
+  local jre_dir
+
+    jre_dir="${java_home}/lib"
+ 
   local lib_dir=""
   if [[ "${os}" == "linux" && ! "${java_version}" =~ (6|7|8) ]]; then
     # no arch on JDK 9+

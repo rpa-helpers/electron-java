@@ -115,7 +115,7 @@
                   ],
                   'libraries': [
                     '-L<(javalibdir)',
-                    '-Wl,-rpath,<(javalibdir)',
+                    '-Wl,-rpath,node_modules/node-jre/jre/jre1.8.0_131.jre/Contents/Home/lib/server',
                     '-ljvm'
                   ],
                 },
