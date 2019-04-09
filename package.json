@@ -8,7 +8,7 @@
     "bridge",
     "electron"
   ],
-  "version": "0.2.3",
+  "version": "0.2.5",
   "engines": {
     "node": ">=7.0.0"
   },
@@ -38,6 +38,9 @@
     "chalk": "2.4.1",
     "nodeunit": "0.11.3",
     "when": "3.7.8"
+  },
+  "peerDependencies": {
+    "node-jre": "^0.2.3"
   },
   "scripts": {
     "test": "node testRunner.js",
