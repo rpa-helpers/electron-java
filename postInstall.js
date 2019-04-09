@@ -2,8 +2,9 @@ var glob = require('glob');
 var fs = require('fs');
 var path = require('path');
 var os = require('os');
+var jre = require('node-jre');
 
-require('find-java-home')(function(err, home){
+var home = path.dirname(path.dirname(jre.driver()));
   var dll;
   var dylib;
   var so,soFiles;
@@ -29,7 +30,6 @@ require('find-java-home')(function(err, home){
       : '""'
     );
   }
-});
 
 function getCorrectSoForPlatform(soFiles){
   var so = _getCorrectSoForPlatform(soFiles);
