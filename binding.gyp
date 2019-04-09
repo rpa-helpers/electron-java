@@ -21,8 +21,11 @@
       ['OS=="mac"', {
       	'javaver%' : "<!(awk -F/ -v h=`node findJavaHome.js` 'BEGIN {n=split(h, a); print a[2]; exit}')"
       }],
-      ['OS=="linux" or OS=="mac" or OS=="freebsd" or OS=="openbsd" or OS=="solaris"', {
+      ['OS=="linux" or OS=="freebsd" or OS=="openbsd" or OS=="solaris"', {
         'javalibdir%': "<!(./find_java_libdir.sh <(target_arch) <(OS))"
+      }],
+      ['OS=="mac"', {
+        'javalibdir%': "<!(./find_jre_libdir.sh <(target_arch) <(OS))"
       }],
     ]
   },
@@ -115,7 +118,8 @@
                   ],
                   'libraries': [
                     '-L<(javalibdir)',
-                    '-Wl,-rpath,node_modules/node-jre/jre/jre1.8.0_131.jre/Contents/Home/lib/server',
+                    '-Wl,-rpath,@loader_path/../../node_modules/node-jre/jre/jre1.8.0_131.jre/Contents/Home/lib/server',
+                    "-Wl,-rpath,@loader_path/../Resources/app.asar.unpacked/node_modules/electron-java/node_modules/node-jre/jre/jre1.8.0_131.jre/Contents/Home/lib/server",
                     '-ljvm'
                   ],
                 },

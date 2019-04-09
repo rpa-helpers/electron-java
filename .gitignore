@@ -10,3 +10,4 @@ node-java.cbp
 *.kdev4
 */.kdev_include_paths
 yarn.lock
+.vscode
