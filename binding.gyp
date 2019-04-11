@@ -118,8 +118,7 @@
                   ],
                   'libraries': [
                     '-L<(javalibdir)',
-                    '-Wl,-rpath,<(javalibdir)',
-                    "-Wl,-rpath,@loader_path/../Resources/app.asar.unpacked/node_modules/node-jre/jre/jre1.8.0_131.jre/Contents/Home/lib/server",
+                    '-Wl,-rpath,@loader_path/../../../node-jre/jre/jre1.8.0_131.jre/Contents/Home/lib/server',
                     '-ljvm'
                   ],
                 },
