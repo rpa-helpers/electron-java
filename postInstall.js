@@ -2,14 +2,16 @@ var glob = require('glob');
 var fs = require('fs');
 var path = require('path');
 var os = require('os');
-var jre = require('node-jre');
 
-var home = path.dirname(path.dirname(jre.driver()));
+require('locate-java-home').default({
+  version: '>=1.8',
+  mustBe64Bit: true,
+}, function(err, homes){
   var dll;
   var dylib;
   var so,soFiles;
   var binary;
-
+  var home = homes[0].path
   if(home){
     dll = glob.sync('**/jvm.dll', {cwd: home})[0];
     dylib = glob.sync('**/libjvm.dylib', {cwd: home})[0];
@@ -30,6 +32,7 @@ var home = path.dirname(path.dirname(jre.driver()));
       : '""'
     );
   }
+});
 
 function getCorrectSoForPlatform(soFiles){
   var so = _getCorrectSoForPlatform(soFiles);

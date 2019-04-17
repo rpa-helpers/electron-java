@@ -21,11 +21,8 @@
       ['OS=="mac"', {
       	'javaver%' : "<!(awk -F/ -v h=`node findJavaHome.js` 'BEGIN {n=split(h, a); print a[2]; exit}')"
       }],
-      ['OS=="linux" or OS=="freebsd" or OS=="openbsd" or OS=="solaris"', {
+      ['OS=="linux" or OS=="freebsd" or OS=="mac" or OS=="openbsd" or OS=="solaris"', {
         'javalibdir%': "<!(./find_java_libdir.sh <(target_arch) <(OS))"
-      }],
-      ['OS=="mac"', {
-        'javalibdir%': "<!(./find_jre_libdir.sh <(target_arch) <(OS))"
       }],
     ]
   },
@@ -118,7 +115,8 @@
                   ],
                   'libraries': [
                     '-L<(javalibdir)',
-                    '-Wl,-rpath,@loader_path/../../../node-jre/jre/jre1.8.0_131.jre/Contents/Home/lib/server',
+                    '-Wl,-rpath,<(javalibdir)',
+                    '-Wl,-rpath,/usr/local/bin/jre/lib/server',
                     '-ljvm'
                   ],
                 },
