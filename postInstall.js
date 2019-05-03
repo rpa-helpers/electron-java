@@ -3,15 +3,12 @@ var fs = require('fs');
 var path = require('path');
 var os = require('os');
 
-require('locate-java-home').default({
-  version: '>=1.8',
-  mustBe64Bit: true,
-}, function(err, homes){
+require('find-java-home')(function(err, home){
   var dll;
   var dylib;
   var so,soFiles;
   var binary;
-  var home = homes[0].path
+
   if(home){
     dll = glob.sync('**/jvm.dll', {cwd: home})[0];
     dylib = glob.sync('**/libjvm.dylib', {cwd: home})[0];
