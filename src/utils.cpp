@@ -339,7 +339,11 @@ jobject v8ToJava(JNIEnv* env, v8::Local<v8::Value> arg) {
   }
 
   if(arg->IsString()) {
-    v8::String::Value val(arg->ToString());
+#if NODE_MAJOR_VERSION > 7
+    v8::String::Value val(v8::Isolate::GetCurrent(), arg->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+#else
+    v8::String::Value val(arg->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+#endif
     return env->NewString(*val, val.length());
   }
 
@@ -644,7 +648,7 @@ v8::Local<v8::Value> javaArrayToV8(Java* java, JNIEnv* env, jobjectArray objArra
   default:
     for(jsize i=0; i<arraySize; i++) {
         jobject obj = env->GetObjectArrayElement(objArray, i);
-        v8::Handle<v8::Value> item = javaToV8(java, env, obj);
+        v8::Local<v8::Value> item = javaToV8(java, env, obj);
         result->Set(i, item);
     }
     break;
