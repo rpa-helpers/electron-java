@@ -35,6 +35,8 @@ main () {
     lib_dir="${jre_dir}/server"
   elif [[ "${os}" == "linux" && "${target_arch}" == "arm" ]]; then
     if [[ -d ${jre_dir}/arm/classic ]]; then lib_dir="${jre_dir}"/arm/classic; else lib_dir="${jre_dir}"/arm/server; fi
+  elif [[ "${os}" == "linux" && "${target_arch}" == "arm64" ]]; then
+    if [[ -d ${jre_dir}/aarch64/classic ]]; then lib_dir="${jre_dir}"/aarch64/classic; else lib_dir="${jre_dir}"/aarch64/server; fi
   elif [[ "${os}" == "linux" && "${target_arch}" == "ia32" ]]; then
     if [[ -d ${jre_dir}/i386/classic ]]; then lib_dir="${jre_dir}"/i386/classic; else lib_dir="${jre_dir}"/i386/server; fi
   elif [[ "${os}" == "linux" && "${target_arch}" == "x64" ]]; then
@@ -45,7 +47,7 @@ main () {
     target_arch=`uname -m`
     if [[ -d ${jre_dir}/${target_arch}/classic ]]; then lib_dir="${jre_dir}"/${target_arch}/classic; else lib_dir="${jre_dir}"/${target_arch}/server; fi
   elif [[ "${os}" == "mac" ]]; then
-    lib_dir="${jre_dir}/server"
+    lib_dir="${jre_dir}/jli"
   else
     local arch
     if [[ "${target_arch}" =~ (32|386) ]]; then
