@@ -8,7 +8,7 @@
     "bridge",
     "electron"
   ],
-  "version": "2.0.2",
+  "version": "2.0.3",
   "engines": {
     "node": ">=7.0.0"
   },
@@ -29,6 +29,7 @@
   "dependencies": {
     "async": "3.1.0",
     "find-java-home": "^1.1.0",
+    "fs-extra": "^8.1.0",
     "glob": "7.1.6",
     "locate-java-home": "^1.1.2",
     "lodash": "4.17.15",

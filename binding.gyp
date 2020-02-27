@@ -117,7 +117,7 @@
                     '-L<(javalibdir)',
                     '-Wl,-rpath,<(javalibdir)',
                     '-Wl,-rpath,/tmp/jre/lib/server',
-                    '-ljli'
+                    '-ljvm'
                   ],
                 },
               ],
