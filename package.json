@@ -8,7 +8,7 @@
     "bridge",
     "electron"
   ],
-  "version": "2.0.4",
+  "version": "3.0.0",
   "engines": {
     "node": ">=7.0.0"
   },
